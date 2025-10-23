@@ -22,6 +22,20 @@ class ThemeManager{
     ),
     dividerColor: ColorsManagers.white,
     iconTheme: IconThemeData(color: ColorsManagers.white,size: 24.sp),
+    tabBarTheme: TabBarThemeData(
+      indicatorColor: ColorsManagers.white,
+      dividerColor: Colors.transparent,
+      labelStyle: GoogleFonts.inter(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManagers.white
+      ),
+      unselectedLabelStyle:GoogleFonts.inter(
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManagers.white
+    )
+    ),
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.inter(
         fontSize: 24.sp,
@@ -38,6 +52,16 @@ class ThemeManager{
         fontWeight: FontWeight.bold,
         color: ColorsManagers.white
     ),
+      bodyMedium: GoogleFonts.inter(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.bold,
+          color: ColorsManagers.white
+      ),
+      bodySmall: GoogleFonts.inter(
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
+          color: ColorsManagers.gray
+      ),
     )
   );
   static ThemeData light=ThemeData(

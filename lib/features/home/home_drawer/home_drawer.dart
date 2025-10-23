@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/resources/assets_managers.dart';
 import 'package:news/core/resources/colors_managers.dart';
-import 'package:news/core/resources/routes_managers.dart';
+import 'package:news/provider/home_screen_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key, required this.goToHome});
-
-  final void Function() goToHome;
+  const HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    HomeScreenProvider homeProvider=Provider.of<HomeScreenProvider>(context);
     TextTheme theme = Theme.of(context).textTheme;
     return Drawer(
       width: 270.w,
@@ -37,7 +37,8 @@ class HomeDrawer extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    goToHome();
+                    homeProvider.goToCategoriesView();
+                    Navigator.pop(context);
                   },
                   borderRadius: BorderRadius.circular(16.r),
                   child: Row(

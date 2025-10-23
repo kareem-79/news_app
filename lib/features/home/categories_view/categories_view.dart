@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/features/home/widget/category_item.dart';
 import 'package:news/model/category_model.dart';
+import 'package:news/provider/home_screen_provider.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesView extends StatelessWidget {
-  const CategoriesView({super.key, required this.onCategoryItemClicked,});
-  final void Function(CategoryModel) onCategoryItemClicked;
+  const CategoriesView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    HomeScreenProvider homeProvider = Provider.of<HomeScreenProvider>(context);
     TextTheme theme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -23,8 +25,8 @@ class CategoriesView extends StatelessWidget {
             child: ListView.separated(
               padding: EdgeInsets.zero,
               itemBuilder: (context, index) => GestureDetector(
-                onTap: (){
-                  onCategoryItemClicked(CategoryModel.categories[index]);
+                onTap: () {
+                  homeProvider.goToSourcesView(CategoryModel.categories[index]);
                 },
                 child: CategoryItem(category: CategoryModel.categories[index]),
               ),
