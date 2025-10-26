@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/resources/assets_managers.dart';
-import 'package:news/features/home/categories_view/categories_view.dart';
 import 'package:news/features/home/home_drawer/home_drawer.dart';
 import 'package:news/provider/home_screen_provider.dart';
 import 'package:provider/provider.dart';

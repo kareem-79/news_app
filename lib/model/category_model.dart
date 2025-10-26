@@ -3,33 +3,59 @@ import 'package:news/core/resources/assets_managers.dart';
 class CategoryModel {
   String id;
   String imageBath;
+  String imageBathWhite;
   String title;
 
   CategoryModel({
     required this.id,
     required this.imageBath,
+    required this.imageBathWhite,
     required this.title,
   });
 
   static List<CategoryModel> categories = [
-    CategoryModel(id: "1", imageBath: AssetsManager.general, title: "General"),
     CategoryModel(
-      id: "2",
+      id: "general",
+      imageBath: AssetsManager.general,
+      imageBathWhite: AssetsManager.generalWhite,
+      title: "General",
+    ),
+    CategoryModel(
+      id: "business",
       imageBath: AssetsManager.business,
+      imageBathWhite: AssetsManager.businessWhite,
       title: "Business",
     ),
-    CategoryModel(id: "3", imageBath: AssetsManager.sports, title: "Sports"),
-    CategoryModel(id: "4", imageBath: AssetsManager.science, title: "Science"),
     CategoryModel(
-      id: "5",
-      imageBath: AssetsManager.entertainment,
-      title: "Entertainment",
+      id: "sports",
+      imageBath: AssetsManager.sports,
+      imageBathWhite: AssetsManager.sportsWhite,
+      title: "Sports",
     ),
     CategoryModel(
-      id: "6",
+      id: "health",
+      imageBath: AssetsManager.health,
+      imageBathWhite: AssetsManager.healthWhite,
+      title: "Health",
+    ),
+    CategoryModel(
+      id: "science",
+      imageBath: AssetsManager.science,
+      imageBathWhite: AssetsManager.scienceWhite,
+      title: "Science",
+    ),
+    CategoryModel(
+      id: "technology",
       imageBath: AssetsManager.technology,
+      imageBathWhite: AssetsManager.technologyWhite,
+
       title: "Technology",
     ),
-    CategoryModel(id: "7", imageBath: AssetsManager.health, title: "Health"),
+    CategoryModel(
+      id: "entertainment",
+      imageBath: AssetsManager.entertainment,
+      imageBathWhite: AssetsManager.entertainmentWhite,
+      title: "Entertainment",
+    ),
   ];
 }

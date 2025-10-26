@@ -1,7 +1,5 @@
-import 'package:news/model/source_model.dart';
 
 class ArticleModel {
-  SourceModel source;
   String author;
   String title;
   String description;
@@ -11,7 +9,6 @@ class ArticleModel {
   String content;
 
   ArticleModel({
-    required this.source,
     required this.author,
     required this.title,
     required this.description,

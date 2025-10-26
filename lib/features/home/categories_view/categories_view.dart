@@ -28,7 +28,10 @@ class CategoriesView extends StatelessWidget {
                 onTap: () {
                   homeProvider.goToSourcesView(CategoryModel.categories[index]);
                 },
-                child: CategoryItem(category: CategoryModel.categories[index]),
+                child: CategoryItem(
+                  category: CategoryModel.categories[index],
+                  index: index,
+                ),
               ),
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
               itemCount: CategoryModel.categories.length,
