@@ -1,5 +1,4 @@
 import 'package:news/api/models/sources.dart';
-
 class SourcesResponse {
   SourcesResponse({
       this.status,
