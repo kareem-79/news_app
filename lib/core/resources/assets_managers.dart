@@ -16,7 +16,7 @@ class AssetsManager{
   static String viewAllLeft="$base/viewAll_left.png";
   static String viewAllRight="$base/viewAll_right.png";
   static String viewAllLeftWhite="$base/viewAll_left_light.png";
-  static String viewAllRightWhite="$base/viewAll_right-light.png";
+  static String viewAllRightWhite="$base/viewAll_right_light.png";
   static String businessWhite="$base/busniess_white.png";
   static String entertainmentWhite="$base/entertainment_white.png";
   static String generalWhite="$base/general_white.png";

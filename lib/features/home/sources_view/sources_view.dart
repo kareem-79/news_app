@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news/features/home/sources_view/provider/article_provider.dart';
+import 'package:news/features/home/sources_view/sources_view_model/article_view_model.dart';
 import 'package:news/features/home/widget/article_widget.dart';
 import 'package:news/model/category_model.dart';
-import 'package:news/features/home/sources_view/provider/source_provider.dart';
+import 'package:news/features/home/sources_view/sources_view_model/source_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SourcesView extends StatefulWidget {
   const SourcesView({super.key, required this.category});
-
   final CategoryModel category;
 
   @override
@@ -16,8 +15,8 @@ class SourcesView extends StatefulWidget {
 }
 
 class _SourcesViewState extends State<SourcesView> {
-  late SourcesProvider sourceProvider;
-  late ArticleProvider articleProvider;
+  late SourcesViewModel sourceProvider;
+  late ArticleViewModel articleProvider;
 
   @override
   void initState() {
@@ -26,8 +25,8 @@ class _SourcesViewState extends State<SourcesView> {
   }
 
   void fetchData() async {
-    sourceProvider = SourcesProvider();
-    articleProvider = ArticleProvider();
+    sourceProvider = SourcesViewModel();
+    articleProvider = ArticleViewModel();
     await sourceProvider.fetchSources(widget.category);
     articleProvider.fetchArticle(sourceProvider.sources[0]);
   }
@@ -44,7 +43,7 @@ class _SourcesViewState extends State<SourcesView> {
         padding: EdgeInsets.all(12.0.sp),
         child: Column(
           children: [
-            Consumer<SourcesProvider>(
+            Consumer<SourcesViewModel>(
               builder: (context, sourceProvider, child) {
                 if (sourceProvider.isLoading) {
                   return Center(
@@ -68,7 +67,7 @@ class _SourcesViewState extends State<SourcesView> {
                 );
               },
             ),
-            Consumer<ArticleProvider>(
+            Consumer<ArticleViewModel>(
               builder: (context, articleProvider, child) {
                 return Expanded(
                   child: articleProvider.isLoading
