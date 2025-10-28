@@ -17,7 +17,7 @@ class ArticleWidget extends StatelessWidget {
       padding: EdgeInsets.all(8.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: ColorsManagers.white),
+        border: Border.all(color: shadowColor),
       ),
       child: Column(
         children: [

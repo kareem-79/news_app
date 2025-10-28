@@ -88,12 +88,12 @@ class ThemeManager {
       labelStyle: GoogleFonts.inter(
         fontSize: 14.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManagers.white,
+        color: ColorsManagers.black,
       ),
       unselectedLabelStyle: GoogleFonts.inter(
         fontSize: 12.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManagers.white,
+        color: ColorsManagers.black,
       ),
     ),
     indicatorColor: ColorsManagers.black,
