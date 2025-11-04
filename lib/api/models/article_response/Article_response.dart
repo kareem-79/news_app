@@ -2,12 +2,17 @@ import 'Article.dart';
 
 class ArticleResponse {
   ArticleResponse({
-      this.status, 
-      this.totalResults, 
-      this.articles,});
+    this.status,
+    this.totalResults,
+    this.articles,
+    this.code,
+    this.message,
+  });
 
   ArticleResponse.fromJson(dynamic json) {
     status = json['status'];
+    code = json['code'];
+    message = json['message'];
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
       articles = [];
@@ -16,8 +21,11 @@ class ArticleResponse {
       });
     }
   }
+
   String? status;
   int? totalResults;
+  String? code;
+  String? message;
   List<Article>? articles;
 
   Map<String, dynamic> toJson() {
@@ -29,5 +37,4 @@ class ArticleResponse {
     }
     return map;
   }
-
 }

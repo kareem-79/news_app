@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'package:dartz/dartz.dart';
 import 'package:news/api/models/Source_response.dart';
 import 'package:news/api/models/article_response/Article_response.dart';
 import 'package:news/api/models/sources.dart';
 import 'package:news/model/category_model.dart';
 import 'package:http/http.dart' as http;
+
+import 'models/article_response/Article.dart';
 
 class ApiService {
   static const String baseUrl = "newsapi.org";
@@ -11,22 +14,35 @@ class ApiService {
   static const String sourcesEndPoint = "/v2/top-headlines/sources";
   static const String articleEndPoint = "/v2/everything";
 
-  static Future<SourcesResponse> getSources(CategoryModel category) async {
+  static Future<Either<String, List<Source>?>> getSources(
+    CategoryModel category,
+  ) async {
     Uri url = Uri.https(baseUrl, sourcesEndPoint, {
       "apiKey": apiKey,
       "category": category.id,
     });
     http.Response serverResponse = await http.get(url);
     var json = jsonDecode(serverResponse.body);
-    return SourcesResponse.fromJson(json);
+    SourcesResponse sourcesResponse = SourcesResponse.fromJson(json);
+    if (sourcesResponse.status == "error") {
+      return left(sourcesResponse.message ?? "");
+    } else {
+      return right(sourcesResponse.sources);
+    }
   }
-  static Future<ArticleResponse> getArticle(Source source) async {
+
+  static Future<Either<String,List<Article>>> getArticle(Source source) async {
     Uri url = Uri.https(baseUrl, articleEndPoint, {
       "apiKey": apiKey,
       "sources": source.id,
     });
     http.Response serverResponse = await http.get(url);
     var json = jsonDecode(serverResponse.body);
-    return ArticleResponse.fromJson(json);
+    ArticleResponse articleResponse = ArticleResponse.fromJson(json);
+    if (articleResponse.status == "error") {
+      return left(articleResponse.message??"");
+    } else {
+      return right(articleResponse.articles??[]);
+    }
   }
 }

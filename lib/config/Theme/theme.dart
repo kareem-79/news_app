@@ -63,7 +63,39 @@ class ThemeManager {
         fontWeight: FontWeight.w500,
         color: ColorsManagers.gray,
       ),
+      displaySmall: GoogleFonts.inter(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManagers.black,
+      ),
+      labelSmall: GoogleFonts.inter(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManagers.white,
+      ),
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      activeIndicatorBorder:BorderSide(color: ColorsManagers.white),
+          hintStyle: GoogleFonts.inter(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w500,
+            color: ColorsManagers.white,
+          ),
+
+          prefixIconColor: ColorsManagers.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16.r),
+            borderSide: BorderSide(color: ColorsManagers.white),
+          ), enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide: BorderSide(color: ColorsManagers.white),
+      ),
+          focusColor: ColorsManagers.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16.r),
+            borderSide: BorderSide(color: ColorsManagers.white),
+          )
+      ),
   );
   static ThemeData light = ThemeData(
     scaffoldBackgroundColor: ColorsManagers.white,

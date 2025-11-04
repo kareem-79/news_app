@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/api/models/article_response/Article.dart';
+import 'package:news/api/models/sources.dart';
 import 'package:news/features/home/sources_view/sources_view_model/article_view_model.dart';
 import 'package:news/features/home/widget/article_widget.dart';
 import 'package:news/model/category_model.dart';
@@ -8,6 +10,7 @@ import 'package:provider/provider.dart';
 
 class SourcesView extends StatefulWidget {
   const SourcesView({super.key, required this.category});
+
   final CategoryModel category;
 
   @override
@@ -15,8 +18,8 @@ class SourcesView extends StatefulWidget {
 }
 
 class _SourcesViewState extends State<SourcesView> {
-  late SourcesViewModel sourceProvider;
-  late ArticleViewModel articleProvider;
+  late SourcesViewModel sourceViewModel;
+  late ArticleViewModel articleViewModel;
 
   @override
   void initState() {
@@ -25,42 +28,50 @@ class _SourcesViewState extends State<SourcesView> {
   }
 
   void fetchData() async {
-    sourceProvider = SourcesViewModel();
-    articleProvider = ArticleViewModel();
-    await sourceProvider.fetchSources(widget.category);
-    articleProvider.fetchArticle(sourceProvider.sources[0]);
+    sourceViewModel = SourcesViewModel();
+    articleViewModel = ArticleViewModel();
+    await sourceViewModel.fetchSources(widget.category);
+    articleViewModel.fetchArticle(sourceViewModel.sources[0]);
   }
 
   @override
   Widget build(BuildContext context) {
     Color shadowColor = Theme.of(context).shadowColor;
+    TextTheme textTheme = Theme.of(context).textTheme;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: sourceProvider),
-        ChangeNotifierProvider.value(value: articleProvider),
+        ChangeNotifierProvider.value(value: sourceViewModel),
+        ChangeNotifierProvider.value(value: articleViewModel),
       ],
       child: Padding(
         padding: EdgeInsets.all(12.0.sp),
         child: Column(
           children: [
             Consumer<SourcesViewModel>(
-              builder: (context, sourceProvider, child) {
-                if (sourceProvider.isLoading) {
+              builder: (context, sourceViewModel, child) {
+                if (sourceViewModel.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(color: shadowColor),
                   );
                 }
+                if (sourceViewModel.errorMessage != null) {
+                  return Center(
+                    child: Text(
+                      sourceViewModel.errorMessage!,
+                      style: textTheme.headlineMedium,
+                    ),
+                  );
+                }
+                List<Source> sources = sourceViewModel.sources;
                 return DefaultTabController(
-                  length: sourceProvider.sources.length,
+                  length: sources.length,
                   child: TabBar(
                     onTap: (index) {
-                      articleProvider.fetchArticle(
-                        sourceProvider.sources[index],
-                      );
+                      articleViewModel.fetchArticle(sources[index]);
                     },
                     isScrollable: true,
                     tabAlignment: TabAlignment.start,
-                    tabs: sourceProvider.sources
+                    tabs: sources
                         .map((source) => Tab(text: source.name))
                         .toList(),
                   ),
@@ -68,21 +79,31 @@ class _SourcesViewState extends State<SourcesView> {
               },
             ),
             Consumer<ArticleViewModel>(
-              builder: (context, articleProvider, child) {
+              builder: (context, articleViewModel, child) {
+                if (articleViewModel.isLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(color: shadowColor),
+                  );
+                }
+                if (articleViewModel.errorMessage != null) {
+                  return Center(
+                    child: Text(
+                      articleViewModel.errorMessage!,
+                      style: textTheme.headlineMedium,
+                    ),
+                  );
+                }
+                List<Article> articles = articleViewModel.articles;
                 return Expanded(
-                  child: articleProvider.isLoading
-                      ? Center(
-                          child: CircularProgressIndicator(color: shadowColor),
-                        )
-                      : ListView.separated(
-                          padding: EdgeInsets.only(top: 20.sp),
-                          itemBuilder: (context, index) => ArticleWidget(
-                            article: articleProvider.articles[index],
-                          ),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(height: 20.h),
-                          itemCount: articleProvider.articles.length,
-                        ),
+                  child: ListView.separated(
+                    padding: EdgeInsets.only(top: 20.sp),
+                    itemBuilder: (context, index) => ArticleWidget(
+                      article: articles[index],
+                    ),
+                    separatorBuilder: (context, index) =>
+                        SizedBox(height: 20.h),
+                    itemCount: articles.length,
+                  ),
                 );
               },
             ),

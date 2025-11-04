@@ -48,7 +48,6 @@ class CategoryModel {
       id: "technology",
       imageBath: AssetsManager.technology,
       imageBathWhite: AssetsManager.technologyWhite,
-
       title: "Technology",
     ),
     CategoryModel(

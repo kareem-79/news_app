@@ -12,7 +12,7 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     Color shadowColor = Theme.of(context).shadowColor;
     HomeScreenProvider homeProvider=Provider.of<HomeScreenProvider>(context);
-    TextTheme theme = Theme.of(context).textTheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Drawer(
       width: 270.w,
       child: Column(
@@ -26,7 +26,7 @@ class HomeDrawer extends StatelessWidget {
               children: [
                 Text(
                   "News App",
-                  style: theme.headlineLarge,
+                  style: textTheme.headlineLarge,
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -48,7 +48,7 @@ class HomeDrawer extends StatelessWidget {
                       SizedBox(width: 10.w),
                       Padding(
                         padding: EdgeInsets.all(8.0.sp),
-                        child: Text("Go To Home", style: theme.headlineMedium),
+                        child: Text("Go To Home", style: textTheme.headlineMedium),
                       ),
                     ],
                   ),
@@ -60,7 +60,7 @@ class HomeDrawer extends StatelessWidget {
                   children: [
                     Image.asset(AssetsManager.themeIcon,color: shadowColor),
                     SizedBox(width: 10.w),
-                    Text("Theme", style: theme.headlineMedium),
+                    Text("Theme", style: textTheme.headlineMedium),
                   ],
                 ),
                 SizedBox(height: 8.h),
@@ -88,14 +88,14 @@ class HomeDrawer extends StatelessWidget {
                   children: [
                     Image.asset(AssetsManager.languageIcon,color: shadowColor),
                     SizedBox(width: 10.w),
-                    Text("Language", style: theme.headlineMedium),
+                    Text("Language", style: textTheme.headlineMedium),
                   ],
                 ),
                 SizedBox(height: 8.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("English", style: theme.headlineMedium),
+                    Text("English", style: textTheme.headlineMedium),
                     Switch(value: true, onChanged: (_) {}),
                   ],
                 ),
