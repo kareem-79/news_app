@@ -74,6 +74,22 @@ class ThemeManager {
         color: ColorsManagers.white,
       ),
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsetsGeometry.all(16.sp),
+        backgroundColor: ColorsManagers.black,
+        foregroundColor: ColorsManagers.white,
+        textStyle: GoogleFonts.inter(
+          fontSize: 16.sp,
+          color: ColorsManagers.white,
+          fontWeight: FontWeight.bold,
+        ),
+        maximumSize: Size(double.infinity, 56.h),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(8.r),
+        ),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       activeIndicatorBorder:BorderSide(color: ColorsManagers.white),
           hintStyle: GoogleFonts.inter(
@@ -81,7 +97,6 @@ class ThemeManager {
             fontWeight: FontWeight.w500,
             color: ColorsManagers.white,
           ),
-
           prefixIconColor: ColorsManagers.white,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16.r),
@@ -154,6 +169,12 @@ class ThemeManager {
         fontSize: 12.sp,
         fontWeight: FontWeight.w500,
         color: ColorsManagers.gray,
+
+      ),
+      displaySmall: GoogleFonts.inter(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManagers.white,
       ),
     ),
   );
