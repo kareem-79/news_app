@@ -98,6 +98,7 @@ class ThemeManager {
             color: ColorsManagers.white,
           ),
           prefixIconColor: ColorsManagers.white,
+          suffixIconColor: ColorsManagers.white,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16.r),
             borderSide: BorderSide(color: ColorsManagers.white),

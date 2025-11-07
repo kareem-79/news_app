@@ -31,7 +31,7 @@ class ApiService {
     }
   }
 
-  static Future<Either<String,List<Article>>> getArticle(Source source) async {
+  static Future<Either<String, List<Article>>> getArticle(Source source) async {
     Uri url = Uri.https(baseUrl, articleEndPoint, {
       "apiKey": apiKey,
       "sources": source.id,
@@ -40,9 +40,29 @@ class ApiService {
     var json = jsonDecode(serverResponse.body);
     ArticleResponse articleResponse = ArticleResponse.fromJson(json);
     if (articleResponse.status == "error") {
-      return left(articleResponse.message??"");
+      return left(articleResponse.message ?? "");
     } else {
-      return right(articleResponse.articles??[]);
+      return right(articleResponse.articles ?? []);
+    }
+  }
+
+  static Future<Either<String, List<Article>>> searchArticle({
+    required String query,
+    required int page,
+  }) async {
+    Uri url = Uri.https(baseUrl, articleEndPoint, {
+      "apiKey": apiKey,
+      "q": query,
+      "page": page.toString(),
+      "pageSize": "10",
+    });
+    http.Response serverResponse = await http.get(url);
+    var json = jsonDecode(serverResponse.body);
+    ArticleResponse articleResponse = ArticleResponse.fromJson(json);
+    if (articleResponse.status == "error") {
+      return left(articleResponse.message ?? "");
+    } else {
+      return right(articleResponse.articles ?? []);
     }
   }
 }

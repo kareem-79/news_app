@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/resources/assets_managers.dart';
+import 'package:news/l10n/app_localizations.dart';
 import 'package:news/provider/config_provider.dart';
 import 'package:news/provider/home_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ class HomeDrawer extends StatelessWidget {
     Color shadowColor = Theme.of(context).shadowColor;
     HomeScreenProvider homeProvider=Provider.of<HomeScreenProvider>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
+    AppLocalizations appLocalizations=AppLocalizations.of(context)!;
     return Drawer(
       width: 270.w,
       child: Column(
@@ -46,9 +48,11 @@ class HomeDrawer extends StatelessWidget {
                     children: [
                       Image.asset(AssetsManager.homeIcon,color: shadowColor,),
                       SizedBox(width: 10.w),
-                      Padding(
-                        padding: EdgeInsets.all(8.0.sp),
-                        child: Text("Go To Home", style: textTheme.headlineMedium),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: Text(appLocalizations.go_to_home, style: textTheme.headlineMedium),
+                        ),
                       ),
                     ],
                   ),
@@ -60,7 +64,7 @@ class HomeDrawer extends StatelessWidget {
                   children: [
                     Image.asset(AssetsManager.themeIcon,color: shadowColor),
                     SizedBox(width: 10.w),
-                    Text("Theme", style: textTheme.headlineMedium),
+                    Text(appLocalizations.theme, style: textTheme.headlineMedium),
                   ],
                 ),
                 SizedBox(height: 8.h),
@@ -69,7 +73,7 @@ class HomeDrawer extends StatelessWidget {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Dark", style: Theme.of(context).textTheme.headlineMedium),
+                        Text(appLocalizations.dark, style: Theme.of(context).textTheme.headlineMedium),
                         Switch(
                           value: configProvider.currentTheme == ThemeMode.dark,
                           onChanged: (bool newValue) {
@@ -88,14 +92,14 @@ class HomeDrawer extends StatelessWidget {
                   children: [
                     Image.asset(AssetsManager.languageIcon,color: shadowColor),
                     SizedBox(width: 10.w),
-                    Text("Language", style: textTheme.headlineMedium),
+                    Text(appLocalizations.language, style: textTheme.headlineMedium),
                   ],
                 ),
                 SizedBox(height: 8.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("English", style: textTheme.headlineMedium),
+                    Text(appLocalizations.english, style: textTheme.headlineMedium),
                     Switch(value: true, onChanged: (_) {}),
                   ],
                 ),

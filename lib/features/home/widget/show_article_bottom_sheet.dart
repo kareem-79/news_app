@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/api/models/article_response/Article.dart';
+import 'package:news/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ShowArticleBottomSheet extends StatelessWidget {
@@ -13,6 +14,7 @@ class ShowArticleBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     Color shadowColor = Theme.of(context).shadowColor;
     TextTheme textTheme = Theme.of(context).textTheme;
+    AppLocalizations appLocalizations=AppLocalizations.of(context)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -44,7 +46,7 @@ class ShowArticleBottomSheet extends StatelessWidget {
                   final uri=Uri.parse(article.url??"");
                   await launchUrl(uri,mode: LaunchMode.inAppWebView);
                 },
-                child: Text("View Full Article"),
+                child: Text(appLocalizations.view_full_article),
               ),
             ],
           ),

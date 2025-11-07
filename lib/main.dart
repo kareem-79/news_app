@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/config/Theme/theme.dart';
 import 'package:news/core/resources/routes_managers.dart';
 import 'package:news/provider/config_provider.dart';
 import 'package:news/provider/home_screen_provider.dart';
 import 'package:provider/provider.dart';
-
 import 'core/prefs_manager/prefs_manager.dart';
+import 'l10n/app_localizations.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefsManager.init();
   final config = ConfigProvider();
@@ -42,6 +43,16 @@ class NewsApp extends StatelessWidget {
         darkTheme: ThemeManager.dark,
         themeMode: configProvider.currentTheme,
         locale: Locale("en"),
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'),
+          Locale('ar'),
+        ],
       ),
     );
   }
