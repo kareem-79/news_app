@@ -42,17 +42,14 @@ class NewsApp extends StatelessWidget {
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
         themeMode: configProvider.currentTheme,
-        locale: Locale("en"),
+        locale: Locale(configProvider.currentLanguage),
         localizationsDelegates: [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
-          Locale('en'),
-          Locale('ar'),
-        ],
+        supportedLocales: [Locale('en'), Locale('ar')],
       ),
     );
   }

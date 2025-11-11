@@ -54,7 +54,7 @@ class ApiService {
       "apiKey": apiKey,
       "q": query,
       "page": page.toString(),
-      "pageSize": "10",
+      "pageSize": "50",
     });
     http.Response serverResponse = await http.get(url);
     var json = jsonDecode(serverResponse.body);

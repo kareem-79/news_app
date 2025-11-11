@@ -19,9 +19,6 @@ class SearchTextField extends StatelessWidget {
       cursorColor: shadowColor,
       cursorHeight: 30,
       keyboardType: TextInputType.text,
-      onChanged: (query) {
-        context.read<SearchViewModel>().search(query);
-      },
       onSubmitted: (query) {
         context.read<SearchViewModel>().search(query);
       },

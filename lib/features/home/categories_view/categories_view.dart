@@ -18,9 +18,16 @@ class CategoriesView extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Column(
         children: [
-          Text(
-            "${appLocalizations.greeting}\n${appLocalizations.news_intro}",
-            style: theme.bodyLarge,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(
+                  "${appLocalizations.greeting}\n${appLocalizations.news_intro}",
+                  style: theme.bodyLarge,
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 16.h),
           Expanded(

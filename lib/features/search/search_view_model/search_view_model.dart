@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:news/api/api_service.dart';
 import 'package:news/api/models/article_response/Article.dart';
@@ -28,7 +26,6 @@ class SearchViewModel extends ChangeNotifier {
       }
     });
   }
-
   Future<void> search(String query) async {
     if (articles.isEmpty) {
       isLoading = true;
