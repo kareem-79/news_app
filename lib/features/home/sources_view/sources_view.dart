@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news/api/models/article_response/Article.dart';
-import 'package:news/api/models/sources.dart';
+import 'package:news/data/api/api_service.dart';
+import 'package:news/data/api/models/article_response/Article.dart';
+import 'package:news/data/api/models/source_response/sources.dart';
+import 'package:news/data/data_article/article_ds.dart';
+import 'package:news/data/data_article_impl/article_api_ds.dart';
+import 'package:news/data/data_sources_impl/sources_api_ds.dart';
+import 'package:news/data/repositories_impl/articles_repository_impl.dart';
+import 'package:news/data/repositories_impl/sources_repository_impl.dart';
 import 'package:news/features/home/sources_view/sources_view_model/article_view_model.dart';
 import 'package:news/features/home/widget/article_widget.dart';
 import 'package:news/model/category_model.dart';
 import 'package:news/features/home/sources_view/sources_view_model/source_view_model.dart';
+import 'package:news/repositories/sources_repository.dart';
 import 'package:provider/provider.dart';
 
 class SourcesView extends StatefulWidget {
@@ -28,8 +35,16 @@ class _SourcesViewState extends State<SourcesView> {
   }
 
   void fetchData() async {
-    sourceViewModel = SourcesViewModel();
-    articleViewModel = ArticleViewModel();
+    sourceViewModel = SourcesViewModel(
+      sourcesRepository: SourcesRepositoryImpl(
+        sourcesDs: SourcesApiDs(apiService: ApiService()),
+      ),
+    );
+    articleViewModel = ArticleViewModel(
+      articlesRepository: ArticlesRepositoryImpl(
+        articleDs: ArticleApiDs(apiService: ApiService()),
+      ),
+    );
     await sourceViewModel.fetchSources(widget.category);
     articleViewModel.fetchArticle(sourceViewModel.sources[0]);
   }
@@ -97,9 +112,8 @@ class _SourcesViewState extends State<SourcesView> {
                 return Expanded(
                   child: ListView.separated(
                     padding: EdgeInsets.only(top: 20.sp),
-                    itemBuilder: (context, index) => ArticleWidget(
-                      article: articles[index],
-                    ),
+                    itemBuilder: (context, index) =>
+                        ArticleWidget(article: articles[index]),
                     separatorBuilder: (context, index) =>
                         SizedBox(height: 20.h),
                     itemCount: articles.length,

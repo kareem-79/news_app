@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
-import 'package:news/api/models/Source_response.dart';
-import 'package:news/api/models/article_response/Article_response.dart';
-import 'package:news/api/models/sources.dart';
 import 'package:news/model/category_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'models/article_response/Article.dart';
+import 'models/article_response/Article_response.dart';
+import 'models/source_response/source_response.dart';
+import 'models/source_response/sources.dart';
 
 class ApiService {
   static const String baseUrl = "newsapi.org";
@@ -14,7 +14,7 @@ class ApiService {
   static const String sourcesEndPoint = "/v2/top-headlines/sources";
   static const String articleEndPoint = "/v2/everything";
 
-  static Future<Either<String, List<Source>?>> getSources(
+  Future<Either<String, List<Source>>> getSources(
     CategoryModel category,
   ) async {
     Uri url = Uri.https(baseUrl, sourcesEndPoint, {
@@ -27,11 +27,11 @@ class ApiService {
     if (sourcesResponse.status == "error") {
       return left(sourcesResponse.message ?? "");
     } else {
-      return right(sourcesResponse.sources);
+      return right(sourcesResponse.sources??[]);
     }
   }
 
-  static Future<Either<String, List<Article>>> getArticle(Source source) async {
+  Future<Either<String, List<Article>>> getArticle(Source source) async {
     Uri url = Uri.https(baseUrl, articleEndPoint, {
       "apiKey": apiKey,
       "sources": source.id,
